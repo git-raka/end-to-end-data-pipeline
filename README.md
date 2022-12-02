@@ -1,10 +1,11 @@
 # End-to-end Data Pipeline
 
-This repo contains architecture design, data flow and process, and procedure to implement the data pipeline.
+This repo contains implementation for end-to-end data pipeline.
 
 
 ## 1. Archtecture
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/98151352/197609684-08ce3afe-20cf-449a-ac64-b815e8c98606.png" />
+  <img src="https://user-images.githubusercontent.com/98151352/205233151-ec969424-be37-4ea2-87a8-3a8e2d233031.png" />
 </p>
+
