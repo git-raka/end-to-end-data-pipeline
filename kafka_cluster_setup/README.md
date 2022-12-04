@@ -11,7 +11,7 @@ In this project We use kafka cluster Because of its fault tolerance and scalabil
 | CPU  | 3x 4 cores  |
 |Storage | 3x 50gb  |
 
-### Create directory for kafka and download kafka.tar
+### 1.Create directory for kafka and download kafka.tar ###
 ```
 mkdir kafka && cd kafka && wget https://downloads.apache.org/kafka/3.3.1/kafka_2.13-3.3.1.tgz
 ```
