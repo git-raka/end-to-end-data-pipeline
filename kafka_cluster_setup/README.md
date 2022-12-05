@@ -96,7 +96,9 @@ Append this :
   
  [Install] 
  WantedBy=multi-user./root 
+ ```
  ### start kafka in each cluster ###
  ```
- sudo systemctl start kafka
+ sudo systemctl start kafa
  ```
+ After kafka running in each cluster installation process is complete,take a rest and grab some coffee
