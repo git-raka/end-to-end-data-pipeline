@@ -28,29 +28,41 @@ cp config/server.properties config/server.1.properties
 cp config/server.properties config/server.2.properties
 cp config/server.properties config/server.3.properties
 ```
+
+**After copy the server property append this conf** :
+
 Server1.properties
 ```
 broker.id=1
+listeners=PLAINTEXT://192.168.18.132:9092
+advertised.listeners=PLAINTEXT://192.168.18.132:9092
+zookeeper.connect=192.168.18.132:2181
 listeners=PLAINTEXT://:9093
 log.dirs=/kafka/logs2
 ```
 Server2.properties
 ```
 broker.id=2
+listeners=PLAINTEXT://192.168.18.133:9093
+advertised.listeners=PLAINTEXT://192.168.18.133:9093
+zookeeper.connect=192.168.18.132:2181
 listeners=PLAINTEXT://:9094
 log.dirs=/kafka/logs2
 ```
 Server3.properties
 ```
 broker.id=3
+listeners=PLAINTEXT://192.168.18.134:9094
+advertised.listeners=PLAINTEXT://192.168.18.134:9094
+zookeeper.connect=192.168.18.132:2181
 listeners=PLAINTEXT://:9095
 log.dirs=/kafka/logs3
 ```
 ### Create the log directories ###
 ```
-mkdir /tmp/kafka-logs1
-mkdir /tmp/kafka-logs2
-mkdir /tmp/kafka-logs3
+mkdir /kafka/logs1
+mkdir /kafka/logs2
+mkdir /kafka/logs3
 ```
 ### Create zookeeper systemd service in node kafka1 ###
 ```
