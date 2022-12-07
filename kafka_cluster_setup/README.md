@@ -114,3 +114,49 @@ Append this :
  sudo systemctl start kafa
  ```
  After kafka running in each cluster installation process is complete,take a rest and grab some coffee
+ 
+ After all kafka service already running without error 
+  ### Kafka Connect setup ###
+  For integration to postgresql and neo4j we use neo4j connector and debezium postgresql connector, its mean we need kafka connect because the connector running in kafka connect 
+  
+  ### Edit connect configuration ###
+  ps : kafka connect only set up in node kafka1 
+  ```
+  mkdir /home/kafka/connect && cd /home/kafka/connect 
+  wget https://repo1.maven.org/maven2/io/debezium/debezium-connector-postgres/1.9.6.Final/debezium-connector-postgres-1.9.6.Final-plugin.tar.gz && tar -xvf      debezium-connector-postgres-1.9.6.Final-plugin.tar.gz
+  wget https://github.com/neo4j-contrib/neo4j-streams/releases/download/4.1.2/neo4j-kafka-connect-neo4j-2.0.2-kc-oss.zip 
+unzip neo4j-kafka-connect-neo4j-2.0.2-kc-oss.zip
+  ```
+  ```
+  cp /home/kafka/config/connect.properties /home/kafka/config/kafka-connect-properties
+  vi /home/kafka/config/kafka-connect-properties
+  ```
+  append this
+  ```
+  bootstrap.servers=192.168.18.132:9092 # bootsrap server is kafka1 ip
+  listeners=HTTP://192.168.18.132:8083
+  plugin.path=/home/kafka/connect # tha connect directory we create before
+  ```
+  ### Create kafka connect running as systemd ###
+  ```
+  vi /etc/systemd/system/kafka_connect.properties
+  ```
+  append this 
+  ```
+  [Unit]
+Requires=kafka.service
+After=kafka.service
+
+[Service]
+Type=simple
+User=kafka1 #change this to name of your user in machine
+ExecStart=/bin/sh -c '/home/kafka1/kafka/bin/connect-distributed.sh /home/kafka1/kafka/config/kafka-connect.properties > /home/kafka1/kafka/logs-1/kafka_connect.log 2>&1'
+Restart=on-abnormal
+
+[Install]
+WantedBy=multi-user.target
+```
+after edited the systemd config you can running the kafka_connect
+```
+systemctl start kafka_connect.services
+```
